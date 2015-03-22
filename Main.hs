@@ -17,7 +17,7 @@ import Web.Scotty
 
 fromUrl :: String -> Request
 fromUrl = fromJust . parseUrl
-campusUrl = "https://www.campus.rwth-aachen.de/office"
+campusUrl = "https://www.campusoffice.fh-aachen.de"
 
 getCalendar :: IO LBS.ByteString
 getCalendar = do
