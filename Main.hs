@@ -17,6 +17,7 @@ import Web.Scotty
 
 fromUrl :: String -> Request
 fromUrl = fromJust . parseUrl
+campusUrl = "https://www.campus.rwth-aachen.de/office"
 
 getCalendar :: IO LBS.ByteString
 getCalendar = do
@@ -25,12 +26,12 @@ getCalendar = do
   curTime <- getCurrentTime
   let startDay = show $ addDays (-60) $ utctDay curTime
       endDay = show $ addDays 400 $ utctDay curTime
-      iCalReq = fromUrl $ "https://www.campus.rwth-aachen.de/office/views/calendar/iCalExport.asp?startdt=" <> startDay <> "&enddt=" <> endDay <> "%2023:59:59"
-      authReq = (fromUrl "https://www.campus.rwth-aachen.de/office/views/campus/redirect.asp") {
+      iCalReq = fromUrl $ campusUrl ++ "/views/calendar/iCalExport.asp?startdt=" <> startDay <> "&enddt=" <> endDay <> "%2023:59:59"
+      authReq = (fromUrl campusUrl ++ "/views/campus/redirect.asp") {
          method = "POST",
          queryString = "?u=" <> user <> "&p=" <> password <> "&login=>%20Login"
         }
-      initialReq = fromUrl "https://www.campus.rwth-aachen.de/office/"
+      initialReq = fromUrl campusUrl
   withManager $ \mgr -> do
     initialResp <- httpLbs initialReq mgr
     let cookie = responseCookieJar initialResp
