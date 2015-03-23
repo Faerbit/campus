@@ -53,7 +53,7 @@ getCalendar = do
   let startDay   = show $ addDays (-60) $ utctDay curTime
       endDay     = show $ addDays 400 $ utctDay curTime
       iCalReq    = fromUrl $ baseUrl <> "/views/calendar/iCalExport.asp?startdt=" <> startDay <> "&enddt=" <> endDay <> "%2023:59:59"
-      authReq    = (fromUrl (baseUrl <> "/views/campus/redirect.asp")) {
+      authReq    = (fromUrl (baseUrl <> "/views/pia/pia.asp")) {
          method      = "POST",
          queryString = "?u=" <> user <> "&p=" <> password <> "&login=>%20Login"
         }
