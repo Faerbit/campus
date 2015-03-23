@@ -26,8 +26,8 @@ getCalendar = do
   curTime <- getCurrentTime
   let startDay = show $ addDays (-60) $ utctDay curTime
       endDay = show $ addDays 400 $ utctDay curTime
-      iCalReq = fromUrl $ campusUrl ++ "/views/calendar/iCalExport.asp?startdt=" <> startDay <> "&enddt=" <> endDay <> "%2023:59:59"
-      authReq = (fromUrl campusUrl ++ "/views/campus/redirect.asp") {
+      iCalReq = fromUrl $ campusUrl <> "/views/calendar/iCalExport.asp?startdt=" <> startDay <> "&enddt=" <> endDay <> "%2023:59:59"
+      authReq = (fromUrl (campusUrl <> "/views/campus/redirect.asp")) {
          method = "POST",
          queryString = "?u=" <> user <> "&p=" <> password <> "&login=>%20Login"
         }
